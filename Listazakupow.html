@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Lista zakupów</title>
+</head>
+<body>
+    <div class="kontener1">
+        <h1>Dodaj przedmiot</h1>
+        <div class="form-group">
+            <input type="text" id="wstaw-przedmiot" placeholder="Dodaj przedmiot..." onkeypress="enterDodaj(event)">
+            <button onclick="dodajPrzedmiot()">Dodaj</button>
+        </div>
+    </div>
+    <div class="separator"></div>
+    <div class="kontener2">
+        <h1>Lista zakupów</h1>
+        <ul id="lista-zakupow"></ul>
+    </div>
+
+    <script>
+        function dodajPrzedmiot() {
+            const input = document.getElementById("wstaw-przedmiot");
+            const itemText = input.value.trim();
+            if (itemText === "") return;
+
+            const list = document.getElementById("lista-zakupow");
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `${itemText} <button class="przycisk-usun" onclick="usunPrzedmiot(this)">Usuń</button>`;
+
+            list.appendChild(listItem);
+            input.value = ""; 
+        }
+
+        function enterDodaj(event) {
+            if (event.key === "Enter") {
+                dodajPrzedmiot();
+            }
+        }
+
+        function usunPrzedmiot(button) {
+            const listItem = button.parentElement;
+            listItem.remove();
+        }
+    </script>
+</body>
+</html>
